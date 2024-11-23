@@ -1,3 +1,22 @@
+
+.drawer {
+  /* padding: 20px; */
+  width: 0;
+  height: 100vh;
+  background-color: #fff;
+  transition: width 2s;
+  position: absolute;
+  right: 0;
+  top: 0;
+  display: none;
+  flex-direction: column;
+
+}
+.drawerMenuItem {
+  border-bottom: 1px solid #ececec;
+  margin: 20px 0;
+  padding: 10px 0;
+}
 .homepage {
   /* max-width: 100%; */
   width: 100vw;
@@ -10,6 +29,16 @@
   align-items: center;
   padding: 0 150px;
   justify-content: space-between;
+  /* padding: 0 50px; */
+}
+.navMobile {
+  height: 87px;
+  /* width: 100%; */
+  display: flex;
+  align-items: center;
+  padding: 0 15px;
+  justify-content: space-between;
+  display: none;
   /* padding: 0 50px; */
 }
 .logo {
@@ -60,6 +89,9 @@
 .text-section-heading {
   font-size: 54px;
 }
+.image-section > img {
+  height: 455px;
+}
 .section2 {
   padding: 80px 150px;
 }
@@ -67,7 +99,8 @@
   margin-top: 50px;
   column-gap: 100px;
   row-gap: 20px;
-  display: flex;
+  display: grid;
+  grid-template-columns: auto auto auto;
   justify-content: center;
 }
 .propertyItem {
@@ -104,7 +137,7 @@
   display: flex;
   flex-direction: column;
   height: 415px;
-  box-shadow: 0px 0px 4px 5px #84848433;
+  box-shadow: 0px 0px 5px #84848433;
   padding-bottom: 2px;
   justify-content: space-between;
 }
@@ -116,4 +149,53 @@
   justify-content: space-between;
   padding: 0 20px;
   margin-top: 20px;
+}
+@media only screen and (max-width: 600px) {
+  .nav {
+    display: none;
+  }
+  .navMobile {
+    display: flex;
+  }
+  .hero-section {
+    flex-direction: column;
+    padding: 20px;
+  }
+  .text-section-heading {
+    font-size: 30px;
+    line-height: 43.5px;
+    text-align: center;
+  }
+  .text-section {
+    width: 100%;
+    padding: 0;
+  }
+  .text-section > p {
+    text-align: center;
+  }
+  .playbtn {
+    flex-direction: column;
+  }
+  .button {
+    width: 100%;
+  }
+  .watchbtn {
+    margin: 0;
+  }
+  .image-section > img {
+    height: 317px;
+  }
+  .section2 {
+    padding: 80px 20px;
+  }
+  .section3 {
+    padding: 50px 20px;
+  }
+  .card-item-container {
+    flex-direction: column;
+  }
+  .propertyTypesList {
+    grid-template-columns: auto auto;
+    column-gap: 10px;
+  }
 }

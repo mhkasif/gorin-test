@@ -1,3 +1,4 @@
+"use client";
 import Image from "next/image";
 import styles from "./page.module.css";
 import bg from "./assets/hero-bg.png";
@@ -8,7 +9,8 @@ import RetailIcon from "./assets/Retail.png";
 import image1 from "./assets/1.png";
 import image2 from "./assets/2.png";
 import image3 from "./assets/3.png";
-
+import ham from "./assets/ham.png";
+import { useState } from "react";
 const propertyTypes = [
   {
     title: "Retail",
@@ -56,16 +58,33 @@ const cards = [
   },
 ];
 export default function Home() {
+  const [showDrawer, setShowDrawer] = useState(false);
+  const toggle = () => {
+    setShowDrawer((prev) => !prev);
+  };
   return (
-    <div className="homepage">
-      <nav className={styles.nav}>
-        <div className={styles.logo}>
-          <Image src={"/logo.png"} width={131} height={29} alt="logo" />
+    <div className="w-100">
+      <div
+        className={styles.drawer}
+        style={{
+          width: showDrawer ? "100%" : 0,
+          display: showDrawer ? "flex" : "none",
+        }}
+      >
+        <div className="flex space-between align-center px-15 nav-height">
+          <Image
+
+            src={"/logo.png"}
+            width={131}
+            height={29}
+            alt="logo"
+          />
+          <h1 className="m0" onClick={toggle}>X</h1>
         </div>
-        <div className={styles.menu}>
-          <div className="menu-item">Features</div>
-          <div className="menu-item">Pricing</div>
-          <div className="menu-item">
+        <div className="px-15">
+          <div className={styles.drawerMenuItem}>Features</div>
+          <div className={styles.drawerMenuItem}>Pricing</div>
+          <div className={styles.drawerMenuItem}>
             <Image
               style={{ marginRight: 4 }}
               src={"/lock.png"}
@@ -75,65 +94,105 @@ export default function Home() {
             />
             Login
           </div>
-          <button className={styles.button}>Try For Free</button>
+          <button className={styles.button + " mr-3"}>Try For Free</button>
         </div>
-      </nav>
-      <section
-        className={styles["hero-section"]}
-        style={{ backgroundImage: `url(${bg.src})` }}
-      >
-        <div className={styles["text-section"]}>
-          <div className={styles["text-section-heading"]}>
-            <b>Sell CRE Faster </b>with <br />
-            OMs & Ads created <br />
-            in <b>minutes</b>
-          </div>
-          <p>
-            Create beautiful Commercial Real Estate Offering Memorandums, Flyers
-            & Ads in minutes with our AI powered platform
-          </p>
-          <div className="flex align-center">
-            <button className={styles.button}>Try for free &rarr;</button>
-            <div className="text-muted flex align-center ml-3">
-              <Image src={playButton.src} width={40} height={40} alt="play " />{" "}
-              <span className="ml-2">Watch Demo</span>
+      </div>
+      {!showDrawer && (
+        <div className="homepage">
+          <nav className={styles.nav}>
+            <div className={styles.logo}>
+              <Image src={"/logo.png"} width={131} height={29} alt="logo" />
             </div>
-          </div>
-        </div>
-        <div className="image-section">
-          <Image src={heroImage.src} height={455} width={528} alt="hero" />
-        </div>
-      </section>
-      <section className={styles.section2}>
-        <p className="text-center text-purple">Create OMs and Ads For</p>
+            <div className={styles.menu}>
+              <div className="menu-item">Features</div>
+              <div className="menu-item">Pricing</div>
+              <div className="menu-item">
+                <Image
+                  style={{ marginRight: 4 }}
+                  src={"/lock.png"}
+                  width={14}
+                  height={14}
+                  alt="login"
+                />
+                Login
+              </div>
+              <button className={styles.button}>Try For Free</button>
+            </div>
+          </nav>
+          <nav className={styles.navMobile}>
+            <div className={styles.logo}>
+              <Image src={"/logo.png"} width={131} height={29} alt="logo" />
+            </div>
+            <div className="ham" onClick={toggle}>
+              {!showDrawer ? (
+                <Image src={ham.src} width={16} height={12} alt="menu" />
+              ) : (
+                <h1>X</h1>
+              )}
+            </div>
+          </nav>
+          <section
+            className={styles["hero-section"]}
+            style={{ backgroundImage: `url(${bg.src})` }}
+          >
+            <div className={styles["text-section"]}>
+              <div className={styles["text-section-heading"]}>
+                <b>Sell CRE Faster </b>with <br />
+                OMs & Ads created <br />
+                in <b>minutes</b>
+              </div>
+              <p>
+                Create beautiful Commercial Real Estate Offering Memorandums,
+                Flyers & Ads in minutes with our AI powered platform
+              </p>
+              <div className={"flex align-center " + styles.playbtn}>
+                <button className={styles.button}>Try for free &rarr;</button>
+                <div
+                  className={
+                    "text-muted flex align-center ml-3 " + styles.watchbtn
+                  }
+                >
+                  <Image
+                    src={playButton.src}
+                    width={40}
+                    height={40}
+                    alt="play "
+                  />{" "}
+                  <span className="ml-2">Watch Demo</span>
+                </div>
+              </div>
+            </div>
+            <div className={styles["image-section"]}>
+              <img src={heroImage.src} width="100%" alt="hero" />
+            </div>
+          </section>
+          <section className={styles.section2}>
+            <p className="text-center text-purple">Create OMs and Ads For</p>
 
-        <h2 className="text-center">Various Real Estate Property Types</h2>
-        <div className={styles.propertyTypesList}>
-          {propertyTypes.slice(0, 3).map((x) => (
-            <PropertyTypes key={x.title} {...x} />
-          ))}
+            <h2 className="text-center">Various Real Estate Property Types</h2>
+            <div className={styles.propertyTypesList}>
+              {propertyTypes.map((x) => (
+                <PropertyTypes key={x.title} {...x} />
+              ))}
+            </div>
+          </section>
+          <section
+            className={styles.section3}
+            style={{ backgroundImage: `url(${purpleBG.src})` }}
+          >
+            <div className={styles["card-container"]}>
+              <h1 className="text-center mb-4">
+                Sample OMs created with our platform
+              </h1>
+              <div className={styles["card-item-container"]}>
+                {cards.map((x) => (
+                  <CardItem key={x.title} {...x} />
+                ))}
+              </div>
+            </div>
+          </section>
         </div>
-        <div className={styles.propertyTypesList}>
-          {propertyTypes.slice(3).map((x) => (
-            <PropertyTypes key={x.title} {...x} />
-          ))}
-        </div>
-      </section>
-      <section
-        className={styles.section3}
-        style={{ backgroundImage: `url(${purpleBG.src})` }}
-      >
-        <div className={styles["card-container"]}>
-          <h1 className="text-center mb-4">
-            Sample OMs created with our platform
-          </h1>
-          <div className={styles["card-item-container"]}>
-            {cards.map((x) => (
-              <CardItem key={x.title} {...x} />
-            ))}
-          </div>
-        </div>
-      </section>
+      )}
     </div>
   );
 }
@@ -147,7 +206,12 @@ const PropertyTypes = ({ title, img }) => {
 };
 const CardItem = ({ img, title, text, filled }) => (
   <div className={styles.cardItem}>
-    <img height={275} src={img.src} alt={title} style={{borderBottom:"1px dashed #B2B2B2"}} />
+    <img
+      height={275}
+      src={img.src}
+      alt={title}
+      style={{ borderBottom: "1px dashed #B2B2B2" }}
+    />
     <div className={styles.cardItemBody}>
       <h3 className="m0">{title}</h3>
       <div className="text-muted">{text}</div>
